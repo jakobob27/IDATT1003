@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Matrise {
 
-    private List<List<Integer>> matrise = new ArrayList<>();
+    private final List<List<Integer>> matrise;
     private int rows=0;
     private int cols=0;
 
