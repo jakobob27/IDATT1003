@@ -1,13 +1,36 @@
-package oving6;
+package Oving6;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Matrise {
 
     private final List<List<Integer>> matrise;
     private int rows=0;
     private int cols=0;
+
+    public Matrise() {
+        List<List<Integer>> tempMatrise = new ArrayList<>();
+        Scanner input = new Scanner(System.in);
+        System.out.println("Hvor mange rader? ");
+        rows= input.nextInt();
+
+        System.out.println("Hvor mange kolonner? ");
+        cols= input.nextInt();
+
+        for (int i=1; i<rows+1;i++) {
+            List<Integer> temp = new ArrayList<>();
+            for (int j=1; j<cols+1; j++) {
+                System.out.println("Skriv inn element nr." +j+" i rad " + i);
+                temp.add(input.nextInt());
+            }
+            tempMatrise.add(temp);
+        }
+        this.matrise=tempMatrise;
+        System.out.println(this);
+
+    }
 
     public Matrise(List<List<Integer>> matrise) {
 
@@ -16,7 +39,7 @@ public class Matrise {
         cols=matrise.get(0).size();
         for (List<Integer> l : matrise) {
             if (l.size()!=cols) {
-            throw new IllegalArgumentException("Radene må ha lik lengde!");
+                throw new IllegalArgumentException("Radene må ha lik lengde!");
             }
         }
     }
@@ -46,6 +69,24 @@ public class Matrise {
                 int val2 = m.getElement(i, j);
 
                 temp.get(i).add(val1+val2);
+            }
+        }
+        return new Matrise(temp);
+    }
+
+    public Matrise subtract(Matrise m) {
+        if (this.rows!=m.getRows() || this.cols!=m.getCols()) {
+            return null;
+        }
+        List<List<Integer>> temp = new ArrayList<>();
+        for (int i=0; i<matrise.size(); i++) {
+            List<Integer> l = new ArrayList<>();
+            temp.add(l);
+            for (int j=0; j<matrise.get(i).size(); j++) {
+                int val1 = this.getElement(i, j);
+                int val2 = m.getElement(i, j);
+
+                temp.get(i).add(val1-val2);
             }
         }
         return new Matrise(temp);
@@ -100,36 +141,21 @@ public class Matrise {
     }
 
     public static void main(String[] args) {
-        List<Integer> list1 = new ArrayList<>();
-        List<Integer> list2 = new ArrayList<>();
-        list1.add(1);
-        list2.add(2);
-        list1.add(3);
-        list2.add(4);
 
-        List<List<Integer>> m1 = new ArrayList<>();
-        m1.add(list1);
-        m1.add(list2);
+        Matrise A = new Matrise();
+        Matrise B = new Matrise();
+        Matrise C = new Matrise();
 
-        List<List<Integer>> m2 = new ArrayList<>();
-        m2.add(list2);
-        m2.add(list1);
+        Matrise AB = A.multiply(B);
+        Matrise BA = B.multiply(A);
 
-        Matrise test1 = new Matrise(m1);
-        Matrise test2 = new Matrise(m2);
+        System.out.println(AB.subtract(BA));
 
-        System.out.println(test1);
-        System.out.println(test2);
+        Matrise AC = A.multiply(C);
+        Matrise CA = C.multiply(A);
 
-        Matrise test3 = test1.addisjon(test2);
+        System.out.println(AC.subtract(CA));
 
-        System.out.println(test3);
-
-        Matrise test4 = test1.multiply(test2);
-
-        System.out.println(test4);
-
-        System.out.println(test4.transpose());
 
     }
 }

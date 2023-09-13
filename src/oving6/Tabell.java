@@ -1,4 +1,4 @@
-package oving6;
+package Oving6;
 
 import java.util.*;
 
