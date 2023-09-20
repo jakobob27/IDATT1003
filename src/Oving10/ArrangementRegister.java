@@ -5,6 +5,8 @@ import java.util.*;
 public class ArrangementRegister {
     private final List<Arrangement> register;
 
+    private static Scanner inp = new Scanner(System.in);
+
     public ArrangementRegister() {
         register=new ArrayList<>();
     }
@@ -104,11 +106,59 @@ public class ArrangementRegister {
         test.nyttArrangement(test2);
         test.nyttArrangement(test3);
 
-        System.out.println(test);
-        System.out.println(test.paSted("Kontoret"));
-        System.out.println(test.paDato(20230918));
-        System.out.println(test.intervallTid(20230918, 20230919));
-        System.out.println(test.sortertLister());
+        System.out.println("Velg modus:");
+        System.out.println("1. Søk på sted");
+        System.out.println("2. Søk etter dato");
+        System.out.println("3. Søk etter tidsintervall");
+        System.out.println("4. Sortert etter sted, type eller tidspunkt");
+
+        int valg = inp.nextInt();
+
+        switch (valg) {
+            case 1 -> {
+                System.out.println("Skriv inn sted: ");
+                inp.nextLine();
+                System.out.println(test.paSted(inp.nextLine()));
+            }
+            case 2 -> {
+                System.out.println("Skriv inn dato på formatet yyyymmdd: ");
+                System.out.println(test.paDato(inp.nextLong()));
+            }
+            case 3 -> {
+                System.out.println("Hvilken tid vil du ha fra? ");
+                long fra = inp.nextLong();
+                System.out.println("Hvilken tid vil du ha til? ");
+                System.out.println(test.intervallTid(fra, inp.nextLong()));
+            }
+            case 4 -> {
+                HashMap<String, HashMap<String, List<Arrangement>>> sortert = test.sortertLister();
+                System.out.println("Hva vil du sortere etter? ");
+                System.out.println("1. Sted");
+                System.out.println("2. Type");
+                System.out.println("3. Tidspunkt");
+                int valg2 = inp.nextInt();
+                switch (valg2) {
+                    case 1 -> {
+                        System.out.println(sortert.get("Steder").keySet());
+                        System.out.println("Skriv inn et sted fra listen");
+                        inp.nextLine();
+                        System.out.println(sortert.get("Steder").get(inp.nextLine()));
+                    }
+                    case 2 -> {
+                        System.out.println(sortert.get("Typer").keySet());
+                        System.out.println("Skriv inn en type fra listen");
+                        inp.nextLine();
+                        System.out.println(sortert.get("Typer").get(inp.nextLine()));
+                    }
+                    case 3 -> {
+                        System.out.println(sortert.get("Tidspunkter").keySet());
+                        System.out.println("Skriv inn et tidspunkt fra listen");
+                        inp.nextLine();
+                        System.out.println(sortert.get("Tidspunkter").get(inp.nextLine()));
+                    }
+                }
+            }
+        }
 
     }
 
