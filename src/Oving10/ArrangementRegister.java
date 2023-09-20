@@ -5,7 +5,7 @@ import java.util.*;
 public class ArrangementRegister {
     private final List<Arrangement> register;
 
-    private static Scanner inp = new Scanner(System.in);
+    private static final Scanner inp = new Scanner(System.in);
 
     public ArrangementRegister() {
         register=new ArrayList<>();
@@ -47,7 +47,7 @@ public class ArrangementRegister {
     public List<Arrangement> intervallTid(long dato1, long dato2) {
         List<Arrangement> temp = new ArrayList<>();
         for (Arrangement i : register) {
-            if (roundDato(i.getTidspunkt())>=dato1 && roundDato(i.getTidspunkt())<=dato2) {
+            if (i.getTidspunkt()>=dato1 && i.getTidspunkt()<=dato2) {
                 temp.add(i);
             }
         }
@@ -106,11 +106,13 @@ public class ArrangementRegister {
         test.nyttArrangement(test2);
         test.nyttArrangement(test3);
 
+        while (true) {
         System.out.println("Velg modus:");
         System.out.println("1. Søk på sted");
         System.out.println("2. Søk etter dato");
         System.out.println("3. Søk etter tidsintervall");
         System.out.println("4. Sortert etter sted, type eller tidspunkt");
+        System.out.println("5. Avslutt");
 
         int valg = inp.nextInt();
 
@@ -158,6 +160,11 @@ public class ArrangementRegister {
                     }
                 }
             }
+            case 5 -> {
+                return;
+            }
+
+        }
         }
 
     }
