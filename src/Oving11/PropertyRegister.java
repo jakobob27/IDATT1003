@@ -46,8 +46,8 @@ public class PropertyRegister {
         }
     }
 
-    public float avgArea() {
-        float sum = 0;
+    public double avgArea() {
+        double sum = 0;
         for (Property i : propertyRegister) {
             sum+=i.getArea();
         }
@@ -176,6 +176,17 @@ public class PropertyRegister {
 
     public static void main(String[] args) {
     PropertyRegister test = new PropertyRegister();
+    Property test1 = new Property(1445, "Gloppen", 77, 631, 1017.6, "Jens Olsen");
+    Property test2 = new Property(1445, "Gloppen", 77, 131, "Syningom", 661.3, "Nicolay Madsen");
+    Property test3 = new Property(1445, "Gloppen", 75, 19, "Fugletun", 650.6, "Evilyn Jensen");
+    Property test4 = new Property(1445, "Gloppen", 74, 188, 1457.2, "Karl Ove Bråten");
+    Property test5 = new Property(1445, "Gloppen", 69, 47, "Høiberg", 1339.4, "Else Indregård");
+
+    test.addProperty(test1);
+    test.addProperty(test2);
+    test.addProperty(test3);
+    test.addProperty(test4);
+    test.addProperty(test5);
     test.start();
     }
 }

@@ -6,10 +6,10 @@ public class Property {
     private int lnr;
     private int snr;
     private String bName;
-    private float area;
+    private double area;
     private String nameOwner;
 
-    public Property(int munNum, String munName, int lnr, int snr, float area, String nameOwner) {
+    public Property(int munNum, String munName, int lnr, int snr, double area, String nameOwner) {
         if (munNum>5054||munNum<101||lnr<1||snr<1||area<=0) {
             throw new IllegalArgumentException();
         }
@@ -21,7 +21,7 @@ public class Property {
         this.nameOwner=nameOwner;
     }
 
-    public Property(int munNum, String munName, int lnr, int snr, String bName, float area, String nameOwner) {
+    public Property(int munNum, String munName, int lnr, int snr, String bName, double area, String nameOwner) {
         this(munNum, munName, lnr, snr, area, nameOwner);
         this.bName=bName;
     }
@@ -30,7 +30,7 @@ public class Property {
         return lnr;
     }
 
-    public float getArea() {
+    public double getArea() {
         return area;
     }
 
