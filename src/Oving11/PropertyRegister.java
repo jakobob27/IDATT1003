@@ -11,7 +11,7 @@ public class PropertyRegister {
     private final int CALCULATE_AVERAGE_AREA = 4;
 
     private final int REMOVE_PROPERTY = 5;
-    private final int SEARCH_BY_LOT_NUMBER=6;
+
     private final int EXIT = 9;
     private final ArrayList<Property> propertyRegister;
 
@@ -38,6 +38,12 @@ public class PropertyRegister {
             }
         }
         return null;
+    }
+
+    public void printProperties(){
+        for (Property i : propertyRegister) {
+            System.out.println(i.toString());
+        }
     }
 
     public float avgArea() {
@@ -67,7 +73,6 @@ public class PropertyRegister {
         System.out.println("3. Search property");
         System.out.println("4. Calculate average area");
         System.out.println("5. Remove property");
-        System.out.println("6. Search by lot number");
         System.out.println("9. Quit");
         System.out.println("\nPlease enter a number between 1 and 9.\n");
         Scanner sc = new Scanner(System.in);
@@ -103,6 +108,7 @@ public class PropertyRegister {
                     System.out.println("Enter the municipality number");
                     int munNum=inp.nextInt();
                     System.out.println("Enter the municipality name");
+                    inp.nextLine();
                     String munName=inp.nextLine();
                     System.out.println("Enter the lot number");
                     int lnr=inp.nextInt();
@@ -111,6 +117,7 @@ public class PropertyRegister {
                     System.out.println("What is the area?");
                     float area=inp.nextFloat();
                     System.out.println("What is the name of the owner?");
+                    inp.nextLine();
                     String nameOwner = inp.nextLine();
                     if (choice==1) {
                         System.out.println("What is the property name?");
@@ -121,14 +128,41 @@ public class PropertyRegister {
                     addProperty(new Property(munNum, munName, lnr, snr, area, nameOwner));
                     break;
                 case LIST_ALL_PROPERTIES:
-//TODO: Fill inn your code here....
+                    printProperties();
                     break;
                 case FIND_PROPERTY:
-//TODO: Fill inn your code here....
+                    System.out.println("What type of search?");
+                    System.out.println("1. By lot number");
+                    System.out.println("2. By municipal number, lot number and section number");
+                    int searchChoice = inp.nextInt();
+
+                    System.out.println("Enter lot number");
+                    int searchLnr = inp.nextInt();
+
+                    switch(searchChoice) {
+                        case 1:
+                            System.out.println(findLnr(searchLnr).toString());
+                            break;
+
+                        case 2:
+                            System.out.println("Enter section number");
+                            int searchSnr = inp.nextInt();
+                            System.out.println("Enter municipical number");
+                            int searchMunNum = inp.nextInt();
+                            System.out.println(findProperty(searchMunNum, searchLnr, searchSnr));
+                    }
                     break;
                 case CALCULATE_AVERAGE_AREA:
-//TODO: Fill inn your code here....
+                    System.out.println(avgArea());
                     break;
+                case REMOVE_PROPERTY:
+                    System.out.println("Enter municipical number");
+                    int remMunNum = inp.nextInt();
+                    System.out.println("Enter lot number");
+                    int remLnr = inp.nextInt();
+                    System.out.println("Enter section number");
+                    int remSnr = inp.nextInt();
+                    removeProperty(findProperty(remMunNum, remLnr, remSnr));
                 case EXIT:
                     System.out.println("Thank you for using the Properties app!\n");
                     finished = true;
