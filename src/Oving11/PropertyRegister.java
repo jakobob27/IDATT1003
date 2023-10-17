@@ -163,6 +163,7 @@ public class PropertyRegister {
                     System.out.println("Enter section number");
                     int remSnr = inp.nextInt();
                     removeProperty(findProperty(remMunNum, remLnr, remSnr));
+                    break;
                 case EXIT:
                     System.out.println("Thank you for using the Properties app!\n");
                     finished = true;
